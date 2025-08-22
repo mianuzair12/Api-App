@@ -6,29 +6,77 @@
         <li>{{product.id}}</li>
     </ul>
 } -->
+<div class="container w-50 p-4 my-3 shadow">
+  <h1 class="head">Add User</h1>
+  <form #userForm="ngForm" (ngSubmit)="addUser( userForm.value)">
+    <div class="mb-3">
+    <input type="text" class="form-control"  placeholder="Enter Name" name="name" [ngModel]="selectedUser?.name">
+  </div>
+    <div class="mb-3">
+    <input type="email" class="form-control"  placeholder="Enter email" name="email" [ngModel]="selectedUser?.email">
+  </div>
+    <div class="mb-3">
+    <input type="number" class="form-control" placeholder="Enter Age" name="age" [ngModel]="selectedUser?.age">
+  </div>
 
-<h1>Add User</h1>
-<form #userForm="ngForm" (ngSubmit)="addUser( userForm.value)">
-  <input type="text" placeholder="Enter Name" name="name" [ngModel]="selectedUser?.name">
+  <!-- <input type="text" placeholder="Enter Name" name="name" [ngModel]="selectedUser?.name">
   <br><br>
   <input type="email" placeholder="Enter email" name="email" [ngModel]="selectedUser?.email">
   <br><br>    
   <input type="number" placeholder="Enter Age" name="age" [ngModel]="selectedUser?.age">
-  <br><br>
-
+  <br><br> -->
+  <div class="text-center">
   @if(!selectedUser){
-    <button>Add User</button>
+    <button class="btn btn-primary w-50">Add User</button>
   }@else{
-    <button>Update User</button>
+    <button class="btn btn-primary w-50">Update User</button>
   }
+  </div>
 </form>
-
-@for(user of users; track user.id){
-    <ul>
+</div>
+<!-- @for(user of users; track user.id){
+    <ul class="user-list">
         <li>{{user.name}}</li>
         <li>{{user.age}}</li>
         <li>{{user.email}}</li>
         <li><button (click)="deleteUser(user.id)">Delete</button></li>
         <li><button (click)="selectUser(user.id)">Update User</button></li>
     </ul>
-}
+} -->
+
+<!-- @for(user of users; track user.id){
+  <ul class="user-list">
+    <li class="user-item">
+      <span>{{ user.name }}</span>
+      <span>{{ user.age }}</span>
+      <span>{{ user.email }}</span>
+      <button (click)="deleteUser(user.id)">Delete User</button>
+      <button (click)="selectUser(user.id)">Update User</button>
+    </li>
+  </ul>
+} -->
+
+<table class="user-table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Email</th>
+      <th>Delete/Update Actions</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    @for(user of users; track user.id){
+      <tr>
+        <td>{{ user.name }}</td>
+        <td>{{ user.age }}</td>
+        <td>{{ user.email }}</td>
+        <td>
+          <button class="delete-btn" (click)="deleteUser(user.id)">Delete User</button>
+          <button class="update-btn" (click)="selectUser(user.id)">Update User</button>
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>
